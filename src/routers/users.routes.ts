@@ -12,7 +12,7 @@ const userRouter: Router = Router ()
 userRouter.post('', verifyEmailMiddleware, verifyDataMiddleWare(userSchema), createUsersController )
 userRouter.get('', verifyTokenMiddleware, verifyAdminMiddleware, listUsersController )
 userRouter.get('/profile', retrieveUserProfileController)
-userRouter.patch('', verifyTokenMiddleware, verifyUserIdMiddleware, verifyEmailMiddleware, verifyDataMiddleWare(updateUserSchema), updateUserController)
+userRouter.patch('/:id', verifyTokenMiddleware, verifyUserIdMiddleware, verifyEmailMiddleware, verifyDataMiddleWare(updateUserSchema), updateUserController)
 
 
 
