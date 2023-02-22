@@ -11,7 +11,7 @@ const userRouter: Router = Router ()
 
 userRouter.post('', verifyEmailMiddleware, verifyDataMiddleWare(userSchema), createUsersController )
 userRouter.get('', verifyTokenMiddleware, verifyAdminMiddleware, listUsersController )
-userRouter.get('/profile', retrieveUserProfileController)
+userRouter.get('/profile', verifyTokenMiddleware, retrieveUserProfileController)
 userRouter.patch('/:id', verifyTokenMiddleware, verifyUserIdMiddleware, verifyEmailMiddleware, verifyDataMiddleWare(updateUserSchema), updateUserController)
 userRouter.delete('/:id',verifyTokenMiddleware, verifyAdminMiddleware, deactivateUserController)
 userRouter.put('/:id/recover', verifyTokenMiddleware, verifyAdminMiddleware, recoverUserController )

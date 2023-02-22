@@ -1,11 +1,11 @@
 import { Request, Response } from 'express'
 import { createUsersService } from './../services/users/createUsers.service'
 import { listUsersService } from '../services/users/listUsers.service'
-import { retrieveUserProfileService } from '../services/users/getUserById.service'
 import { TUserFullWithoutPassword, TUserResponse, TUserUpdateRequest } from '../interfaces/users.interfaces'
 import { updateUserService } from '../services/users/updateUser.service'
 import { deactivateUserService } from '../services/users/deactivateUser.service'
 import { recoverUserService } from '../services/users/recoverUser.service'
+import { retrieveUserProfileService } from '../services/users/retrieveUserProfile.service'
 // import { updateUserService } from '../services/users/updateUser.service'
 
 
@@ -20,8 +20,9 @@ const listUsersController = async ( req: Request, res: Response ): Promise<Respo
 }
 
 const retrieveUserProfileController = async ( req: Request, res: Response ): Promise<Response> => {
-    const data = await retrieveUserProfileService(req.body)
-    return res.status(200).json(data)
+    const userId: number = Number(req.user.id)
+    const user: TUserFullWithoutPassword = await retrieveUserProfileService(userId)
+    return res.status(200).json(user)
 }
 
 const updateUserController = async ( req: Request, res: Response ): Promise<Response> => {
