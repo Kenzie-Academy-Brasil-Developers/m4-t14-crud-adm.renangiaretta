@@ -3,7 +3,7 @@ import { ZodTypeAny } from 'zod'
 
 const verifyDataMiddleWare = ( schema: ZodTypeAny ) => ( req: Request, res: Response, next: NextFunction ): Response | void => {
     const validatedData = schema.parse(req.body)
-    req.body = validatedData
+        req.body        = validatedData
 
     return next()
 }

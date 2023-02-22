@@ -1,7 +1,6 @@
 import { client } from "../../database"
 
 
-
 const listUsersService = async () => {
     const queryString = `
         SELECT

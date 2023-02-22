@@ -1,12 +1,11 @@
 import { QueryConfig, QueryResult } from "pg";
 import { client } from "../../database"
-import { IUserFull, TUserFullWithoutPassword, TUserQueryResponse, TUserResponse } from "../../interfaces/users.interfaces"
-import { createUserReturnSchema, userWithoutPasswordSchema } from "../../schemas/user.schema";
-
+import { IUserFull, TUserFullWithoutPassword } from "../../interfaces/users.interfaces"
+import { createUserReturnSchema } from "../../schemas/user.schema";
 
 
 const retrieveUserProfileService = async ( userId: number ): Promise<TUserFullWithoutPassword> => {
-    const id: number = Number(userId)
+    const id: number  = Number(userId)
     const queryString = `
         SELECT
             *
@@ -16,7 +15,7 @@ const retrieveUserProfileService = async ( userId: number ): Promise<TUserFullWi
             "id" = $1
     `;
     const queryConfig: QueryConfig = {
-        text: queryString,
+        text  : queryString,
         values: [id]
     }
     const queryResult: QueryResult<IUserFull> = await client.query(queryConfig)

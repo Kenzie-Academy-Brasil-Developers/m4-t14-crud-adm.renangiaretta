@@ -4,13 +4,8 @@ import { IUserFull, TUserFullWithoutPassword } from "../../interfaces/users.inte
 import { createUserReturnSchema } from '../../schemas/user.schema';
 
 
-
-
-
-
 const recoverUserService = async ( userId: number ): Promise<TUserFullWithoutPassword> => {
     const id: number = userId
-
     const queryString: string = `
     UPDATE
         users
@@ -21,7 +16,7 @@ const recoverUserService = async ( userId: number ): Promise<TUserFullWithoutPas
     RETURNING *;   
     `
     const queryConfig: QueryConfig = {
-        text: queryString,
+        text  : queryString,
         values: [id]
     }
     const queryResult: QueryResult<IUserFull> = await client.query(queryConfig)

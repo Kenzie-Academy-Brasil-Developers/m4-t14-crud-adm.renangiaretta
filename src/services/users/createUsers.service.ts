@@ -5,8 +5,8 @@ import { TUserQueryResponse, TUserRequest, TUserResponse } from './../../interfa
 
 const createUsersService = async ( data:TUserRequest ): Promise<any> => {
     try {
-        const keys = Object.keys(data)
-    const values = Object.values(data)
+    const keys        = Object.keys(data)
+    const values      = Object.values(data)
     const queryString = `
     INSERT INTO
         users(%I)
@@ -14,9 +14,9 @@ const createUsersService = async ( data:TUserRequest ): Promise<any> => {
         (%L)
     RETURNING *;    
     `
-    const queryFormat = format(queryString, keys, values)
+    const queryFormat                     = format(queryString, keys, values)
     const queryResult: TUserQueryResponse = await client.query(queryFormat)
-    const newUser: TUserResponse = userWithoutPasswordSchema.parse(queryResult.rows[0])
+    const newUser: TUserResponse          = userWithoutPasswordSchema.parse(queryResult.rows[0])
     return newUser
     } catch (error) {
         

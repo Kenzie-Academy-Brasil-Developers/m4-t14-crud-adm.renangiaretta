@@ -1,14 +1,12 @@
-import { QueryConfig, QueryResult } from 'pg';
-import { TUserFullWithoutPassword, TUserResponse, TUserResult, TUserUpdateRequest, TUserWithoutPassword } from "../../interfaces/users.interfaces";
-import { createUserReturnSchema, userCreatedSchema, userWithoutPasswordSchema } from '../../schemas/user.schema';
+import { QueryConfig } from 'pg';
+import { TUserFullWithoutPassword, TUserResult, TUserUpdateRequest } from "../../interfaces/users.interfaces";
+import { createUserReturnSchema } from '../../schemas/user.schema';
 import format from 'pg-format'
 import { client } from '../../database';
 
 
-
-
 const updateUserService = async ( userData: TUserUpdateRequest, id: number ): Promise<TUserFullWithoutPassword> => {
-    const validateBody = userData
+    const validateBody        = userData
     const queryString: string = format(`
     UPDATE
         users
@@ -21,12 +19,10 @@ const updateUserService = async ( userData: TUserUpdateRequest, id: number ): Pr
     Object.values(validateBody)
     );
     const queryConfig: QueryConfig = {
-        text: queryString,
+        text  : queryString,
         values: [id]
     }
-
     const queryResult: TUserResult = await client.query(queryConfig)
-
     return createUserReturnSchema.parse(queryResult.rows[0])
 }
 

@@ -5,7 +5,7 @@ const router: Router = Router()
 
 router.use('/users', userRouter)
 router.use('/login', sessionRouter)
-
+router.use('/:id', userRouter)
 
 
 export { router }

@@ -1,14 +1,8 @@
 import { QueryConfig } from "pg"
 import { client } from "../../database"
 
-
-
-
-
-
-
 const deactivateUserService = async ( userId: number ): Promise<void> => {
-    const id = userId
+    const id                  = userId
     const queryString: string = `
     UPDATE
         users
@@ -19,7 +13,7 @@ const deactivateUserService = async ( userId: number ): Promise<void> => {
     RETURNING *;
     `
     const queryConfig: QueryConfig = {
-        text: queryString,
+        text  : queryString,
         values: [id]
     }
     await client.query(queryConfig)

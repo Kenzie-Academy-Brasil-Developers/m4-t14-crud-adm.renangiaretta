@@ -4,8 +4,8 @@ declare global {
     namespace Express {
         interface Request {
             getEmail: string
-            user: {
-                id: number
+            user    : {
+                id   : number
                 admin: boolean
                 }
         }

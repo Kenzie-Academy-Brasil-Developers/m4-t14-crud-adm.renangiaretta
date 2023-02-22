@@ -9,13 +9,12 @@ const verifyTokenMiddleware = ( req: Request, res: Response, next: NextFunction 
         throw new AppError('Token is missing', 401)
     }
     token = token.split(' ')[1]
-
     jwt.verify(token, process.env.SECRET_KEY!, ( err, decoded:any ) => {
         if(err) {
             throw new AppError(err.message, 401)
         }
         req.user = {
-            id: Number(decoded.sub),
+            id   : Number(decoded.sub),
             admin: (decoded.admin)
         }
         next ()

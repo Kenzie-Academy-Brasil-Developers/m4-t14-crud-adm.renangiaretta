@@ -15,17 +15,12 @@ const loginService = async ( email: string, password: string ) => {
             "email" = $1
     `
     const queryResult: TUserQueryResponse = await client.query(queryString, [email])
-
-
     if (queryResult.rowCount === 0 ) {
-        console.log('email: ', email, 'password:', password)
-        console.log(queryResult.rows[0].password)
-        // throw new AppError( 'Wrong e-mail or passwordo', 401 )
+        throw new AppError( 'Wrong e-mail or passwordo', 401 )
     }
     const matchPassword: boolean = await compare( password, queryResult.rows[0].password )
     if (!matchPassword) {
-        console.log(queryResult.rows[0].password)
-        // throw new AppError('Wrong e-mail or password', 401)
+        throw new AppError('Wrong e-mail or password', 401)
     }
     const token: string = jwt.sign(
         {
@@ -33,13 +28,11 @@ const loginService = async ( email: string, password: string ) => {
         },
         process.env.SECRET_KEY!,
         {
-            subject: queryResult.rows[0].id.toString(),
+            subject  : queryResult.rows[0].id.toString(),
             expiresIn: '24h'
         }
     )
-    console.log('aqui', queryResult.rows[0].admin)
     return { token }
 }
-
 
 export { loginService }
