@@ -4,6 +4,7 @@ import { listUsersService } from '../services/users/listUsers.service'
 import { retrieveUserProfileService } from '../services/users/getUserById.service'
 import { TUserFullWithoutPassword, TUserResponse, TUserUpdateRequest } from '../interfaces/users.interfaces'
 import { updateUserService } from '../services/users/updateUser.service'
+import { deactivateUserService } from '../services/users/deactivateUser.service'
 // import { updateUserService } from '../services/users/updateUser.service'
 
 
@@ -29,7 +30,13 @@ const updateUserController = async ( req: Request, res: Response ): Promise<Resp
     return res.status(200).json(user)
 }
 
+const deactivateUserController = async ( req: Request, res: Response ): Promise<Response> => {
+    const userId: number = parseInt(req.params.id)
+    await deactivateUserService(userId)
+
+    return res.status(204).json()
+}
 
 
 
-export { createUsersController, listUsersController, retrieveUserProfileController, updateUserController }
+export { createUsersController, listUsersController, retrieveUserProfileController, updateUserController, deactivateUserController }

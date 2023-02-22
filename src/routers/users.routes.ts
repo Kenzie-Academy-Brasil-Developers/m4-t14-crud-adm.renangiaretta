@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { createUsersController, listUsersController, retrieveUserProfileController, updateUserController } from '../controllers/users.controllers'
+import { createUsersController, deactivateUserController, listUsersController, retrieveUserProfileController, updateUserController } from '../controllers/users.controllers'
 import { verifyAdminMiddleware } from '../middlewares/verifyAdmin.middleware'
 import { verifyEmailMiddleware } from '../middlewares/verifyEmail.middleware'
 import { verifyTokenMiddleware } from '../middlewares/verifyToken.middleware'
@@ -13,7 +13,7 @@ userRouter.post('', verifyEmailMiddleware, verifyDataMiddleWare(userSchema), cre
 userRouter.get('', verifyTokenMiddleware, verifyAdminMiddleware, listUsersController )
 userRouter.get('/profile', retrieveUserProfileController)
 userRouter.patch('/:id', verifyTokenMiddleware, verifyUserIdMiddleware, verifyEmailMiddleware, verifyDataMiddleWare(updateUserSchema), updateUserController)
-
+userRouter.delete('/:id',verifyTokenMiddleware, verifyAdminMiddleware, deactivateUserController)
 
 
 export { userRouter }
