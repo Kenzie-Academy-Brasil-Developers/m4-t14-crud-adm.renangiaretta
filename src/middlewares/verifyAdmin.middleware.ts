@@ -8,7 +8,7 @@ const verifyAdminMiddleware = ( req: Request, res: Response, next: NextFunction 
 
     if (!isAdmin) {
         console.log(isAdmin)
-        throw new AppError('You are not admin. MWAHAHAHAHAHA', 400)
+        throw new AppError('You are not admin. MWAHAHAHAHAHA', 401)
     }
     console.log(isAdmin)
     return next()

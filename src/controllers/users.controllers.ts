@@ -5,6 +5,7 @@ import { retrieveUserProfileService } from '../services/users/getUserById.servic
 import { TUserFullWithoutPassword, TUserResponse, TUserUpdateRequest } from '../interfaces/users.interfaces'
 import { updateUserService } from '../services/users/updateUser.service'
 import { deactivateUserService } from '../services/users/deactivateUser.service'
+import { recoverUserService } from '../services/users/recoverUser.service'
 // import { updateUserService } from '../services/users/updateUser.service'
 
 
@@ -37,6 +38,15 @@ const deactivateUserController = async ( req: Request, res: Response ): Promise<
     return res.status(204).json()
 }
 
+const recoverUserController = async ( req: Request, res: Response ): Promise<Response> => {
+
+    const userId: number = parseInt(req.params.id)
+    console.log('userId', userId)
+    const user: TUserFullWithoutPassword = await recoverUserService(userId)
+
+    return res.status(200).json(user)
+}
 
 
-export { createUsersController, listUsersController, retrieveUserProfileController, updateUserController, deactivateUserController }
+
+export { createUsersController, listUsersController, retrieveUserProfileController, updateUserController, deactivateUserController, recoverUserController }
