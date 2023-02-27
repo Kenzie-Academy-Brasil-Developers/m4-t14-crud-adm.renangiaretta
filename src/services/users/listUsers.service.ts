@@ -10,7 +10,7 @@ const listUsersService = async () => {
         FROM
             users;    
     `
-    const queryResult = await client.query(queryString)
+    const queryResult                    = await client.query(queryString)
     const allUsers: TUserWithoutPassword = userListSchema.parse(queryResult.rows)
     return allUsers
 }

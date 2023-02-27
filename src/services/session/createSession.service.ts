@@ -24,7 +24,7 @@ const loginService = async ( email: string, password: string ) => {
     }
     const token: string = jwt.sign(
         {
-            admin: queryResult.rows[0].admin
+            admin    : queryResult.rows[0].admin
         },
         process.env.SECRET_KEY!,
         {

@@ -5,7 +5,7 @@ import { createUserReturnSchema } from '../../schemas/user.schema';
 
 
 const recoverUserService = async ( userId: number ): Promise<TUserFullWithoutPassword> => {
-    const id: number = userId
+    const id: number          = userId
     const queryString: string = `
     UPDATE
         users

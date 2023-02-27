@@ -43,4 +43,11 @@ const recoverUserController = async ( req: Request, res: Response ): Promise<Res
     return res.status(200).json(user)
 }
 
-export { createUsersController, listUsersController, retrieveUserProfileController, updateUserController, deactivateUserController, recoverUserController }
+export { 
+    createUsersController,
+    listUsersController,
+    retrieveUserProfileController,
+    updateUserController,
+    deactivateUserController,
+    recoverUserController
+}

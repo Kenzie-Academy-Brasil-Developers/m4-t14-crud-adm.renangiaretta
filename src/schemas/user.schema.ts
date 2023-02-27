@@ -6,7 +6,7 @@ const userSchema = z.object({
     name    : z.string().max(20),
     email   : z.string().max(100).email(),
     password: z.string().max(120).transform(pass => hashSync(pass, 10)),
-    admin: z.boolean()
+    admin   : z.boolean()
 }).partial({
     admin: true
 })
@@ -34,7 +34,7 @@ const updateUserSchema = userFullSchema.omit({
     id    : true,
     active: true
 }).partial({
-    admin : true,
+    admin   : true,
     name    : true,
     password: true,
     email   : true
@@ -44,4 +44,11 @@ const createUserReturnSchema = userFullSchema.omit({password: true})
 
 
 
-export { userSchema, userCreatedSchema, userWithoutPasswordSchema, userListSchema, updateUserSchema, userFullSchema, createUserReturnSchema }
+export { userSchema,
+    userCreatedSchema,
+    userWithoutPasswordSchema,
+    userListSchema,
+    updateUserSchema,
+    userFullSchema,
+    createUserReturnSchema
+}

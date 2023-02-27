@@ -4,7 +4,7 @@ import { TUserFullWithoutPassword } from '../interfaces/users.interfaces';
 import { client } from '../database';
 import { AppError } from '../errors/appError';
 
-const verifyUserIdMiddleware = async ( req: Request, res: Response, next: NextFunction ):Promise<Response | void> => {
+const verifyUserIdMiddleware  = async ( req: Request, res: Response, next: NextFunction ):Promise<Response | void> => {
     const id: number          = parseInt(req.params.id)
     const userTokenId         = req.user.id
     const queryString: string = `
