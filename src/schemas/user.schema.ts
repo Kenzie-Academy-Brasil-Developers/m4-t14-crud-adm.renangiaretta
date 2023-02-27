@@ -5,7 +5,10 @@ import { z } from 'zod'
 const userSchema = z.object({
     name    : z.string().max(20),
     email   : z.string().max(100).email(),
-    password: z.string().max(120).transform(pass => hashSync(pass, 10))
+    password: z.string().max(120).transform(pass => hashSync(pass, 10)),
+    admin: z.boolean()
+}).partial({
+    admin: true
 })
 
 const userCreatedSchema = userSchema.extend({
@@ -29,9 +32,9 @@ const userFullSchema = z.object({
 
 const updateUserSchema = userFullSchema.omit({
     id    : true,
-    admin : true,
     active: true
 }).partial({
+    admin : true,
     name    : true,
     password: true,
     email   : true

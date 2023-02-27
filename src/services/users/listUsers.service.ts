@@ -1,4 +1,6 @@
 import { client } from "../../database"
+import { TUserWithoutPassword } from "../../interfaces/users.interfaces"
+import { userListSchema, userWithoutPasswordSchema } from "../../schemas/user.schema"
 
 
 const listUsersService = async () => {
@@ -9,7 +11,8 @@ const listUsersService = async () => {
             users;    
     `
     const queryResult = await client.query(queryString)
-    return queryResult.rows
+    const allUsers: TUserWithoutPassword = userListSchema.parse(queryResult.rows)
+    return allUsers
 }
 
 export { listUsersService }

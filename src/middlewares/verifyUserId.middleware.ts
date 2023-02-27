@@ -25,8 +25,8 @@ const verifyUserIdMiddleware = async ( req: Request, res: Response, next: NextFu
             message: 'Developer not found.'
         })
     }
-    if (id !== userTokenId) {
-        throw new AppError('BAD REQUEST', 400)
+    if ( !req.user.admin && id !== userTokenId) {
+        throw new AppError('Insufficient Permission', 403)
     }
     if(req.method === 'PATCH') {
         req.getEmail = queryResult.rows[0].email

@@ -9,12 +9,11 @@ import { verifyDataMiddleWare } from './../middlewares/verifyData.middleware'
 
 const userRouter: Router = Router ()
 
-userRouter.post('', verifyEmailMiddleware, verifyDataMiddleWare(userSchema), createUsersController )
+userRouter.post('',verifyDataMiddleWare(userSchema), verifyEmailMiddleware,  createUsersController )
 userRouter.get('', verifyTokenMiddleware, verifyAdminMiddleware, listUsersController )
 userRouter.get('/profile', verifyTokenMiddleware, retrieveUserProfileController)
-userRouter.patch('/:id', verifyTokenMiddleware, verifyUserIdMiddleware, verifyEmailMiddleware, verifyDataMiddleWare(updateUserSchema), updateUserController)
-userRouter.delete('/:id',verifyTokenMiddleware, verifyAdminMiddleware, deactivateUserController)
+userRouter.patch('/:id', verifyDataMiddleWare(updateUserSchema), verifyTokenMiddleware, verifyUserIdMiddleware, verifyEmailMiddleware,  updateUserController)
+userRouter.delete('/:id',verifyTokenMiddleware, verifyUserIdMiddleware, deactivateUserController)
 userRouter.put('/:id/recover', verifyTokenMiddleware, verifyAdminMiddleware, recoverUserController )
 
 export { userRouter }
-
